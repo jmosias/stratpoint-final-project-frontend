@@ -1,3 +1,14 @@
 .signup {
   width: 100%;
+
+  .name {
+    width: 100%;
+    display: flex;
+    gap: 1.2rem;
+
+    > :first-child,
+    > :last-child {
+      width: calc(50% - 0.6rem);
+    }
+  }
 }

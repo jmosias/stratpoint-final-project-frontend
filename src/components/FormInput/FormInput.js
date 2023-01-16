@@ -1,7 +1,7 @@
 import { useId } from "react";
 import classes from "./FormInput.module.scss";
 
-function FormInput({ label, placeholder, value, onChange, error }) {
+function FormInput({ type, label, placeholder, value, onChange, error }) {
   const id = useId();
 
   return (
@@ -11,7 +11,7 @@ function FormInput({ label, placeholder, value, onChange, error }) {
       </label>
       <input
         id={id}
-        type="text"
+        type={type || "text"}
         placeholder={placeholder}
         className={classes.input + " " + (error ? classes.error : "")}
         value={value}

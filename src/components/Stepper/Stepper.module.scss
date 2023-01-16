@@ -1,0 +1,48 @@
+@import "../../styles/variables";
+
+.stepper {
+  border-bottom: 0.15rem solid $light-gray;
+  display: flex;
+  gap: 1.2rem;
+
+  .step {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.75rem;
+
+    .stepNumber {
+      $box-size: 2.1rem;
+      height: $box-size;
+      min-height: $box-size;
+      max-height: $box-size;
+      width: $box-size;
+      min-width: $box-size;
+      max-width: $box-size;
+      border-radius: 0.3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $light-gray;
+      color: $gray;
+      font-weight: $bold;
+    }
+
+    .stepTitle {
+      color: $gray;
+    }
+
+    &.active {
+      .stepNumber {
+        background-color: $primary;
+        color: $white;
+      }
+
+      .stepTitle {
+        color: $black;
+        font-weight: $bold;
+      }
+    }
+  }
+}

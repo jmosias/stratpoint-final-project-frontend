@@ -1,3 +1,5 @@
+import axios from "axios";
+import FeatherIcon from "feather-icons-react";
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AppAccount from "../../components/AppAccount";
@@ -9,12 +11,16 @@ import checkValidation from "../../helpers/checkValidation";
 import { initialSignupData, signupFormRules } from "../../helpers/rulesSignup";
 import classes from "./SignUp.module.scss";
 
+const defaultImage = require("../../images/default_profile_photo.png");
+
 function SignUp() {
   const [formData, setFormData] = useState(initialSignupData);
+  const [pictureFile, setPictureFile] = useState();
   const [errors, setErrors] = useState({});
   const [stepCounter, setStepCounter] = useState(0);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [isValidated, setIsValidated] = useState(false);
+  const [defaultPicture, setdefaultPicture] = useState(defaultImage);
 
   const signupSteps = ["Account Information", "User Photo"];
 
@@ -38,9 +44,29 @@ function SignUp() {
     setHasSubmitted(true);
   };
 
+  const fileHandler = (e) => {
+    setPictureFile(e.target.files[0]);
+    setdefaultPicture(URL.createObjectURL(e.target.files[0]));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+
+    const finalFormData = new FormData();
+    Object.keys(formData).forEach((key) => {
+      console.log(key);
+      finalFormData.append(key, formData[key]);
+    });
+    finalFormData.append("profile_picture", pictureFile);
+
+    axios
+      .post("http://localhost:7000/users/signup", finalFormData)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -58,33 +84,57 @@ function SignUp() {
           <h2 className={classes.title}>Create an Account</h2>
         </div>
 
-        <div className={classes.formContainer}>
+        <div className={classes["form-container"]}>
           <Stepper steps={signupSteps} counter={stepCounter} />
 
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={handleSubmit}
+            className={classes.form}
+            encType="multipart/form-data"
+          >
             {isValidated ? (
-              <div>change photo here</div>
+              <div className={classes["upload-photo"]}>
+                <div className={classes["avatar-container"]}>
+                  <img
+                    src={defaultPicture}
+                    alt="avatar"
+                    className={classes.avatar}
+                  />
+                </div>
+
+                <label htmlFor="profile-input" className={classes.uploader}>
+                  <FeatherIcon icon="upload" className={classes.icon} />
+                  Upload your photo
+                </label>
+                <input
+                  id="profile-input"
+                  type="file"
+                  filename="profile_picture_url"
+                  onChange={fileHandler}
+                  hidden
+                />
+              </div>
             ) : (
-              <>
+              <div className={classes.inputs}>
                 <div className={classes.name}>
                   <FormInput
                     label="First Name"
-                    value={formData.firstName}
+                    value={formData.first_name}
                     onChange={(e) => {
-                      setFormData({ ...formData, firstName: e.target.value });
-                      setErrors({ ...errors, firstName: null });
+                      setFormData({ ...formData, first_name: e.target.value });
+                      setErrors({ ...errors, first_name: null });
                     }}
-                    error={errors["firstName"]}
+                    error={errors["first_name"]}
                   />
 
                   <FormInput
                     label="Last Name"
-                    value={formData.lastName}
+                    value={formData.last_name}
                     onChange={(e) => {
-                      setFormData({ ...formData, lastName: e.target.value });
-                      setErrors({ ...errors, lastName: null });
+                      setFormData({ ...formData, last_name: e.target.value });
+                      setErrors({ ...errors, last_name: null });
                     }}
-                    error={errors["lastName"]}
+                    error={errors["last_name"]}
                   />
                 </div>
 
@@ -118,7 +168,7 @@ function SignUp() {
                   }}
                   error={errors["password"]}
                 />
-              </>
+              </div>
             )}
 
             {/* FORM BUTTONS */}

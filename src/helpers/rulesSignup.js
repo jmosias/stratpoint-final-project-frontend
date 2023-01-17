@@ -1,20 +1,20 @@
 import validator from "validator";
 
 export const initialSignupData = {
-  firstName: "",
-  lastName: "",
+  first_name: "",
+  last_name: "",
   username: "",
   email: "",
   password: "",
 };
 
 export const signupFormRules = {
-  firstName: {
+  first_name: {
     emptyMessage: "Please provide your first name",
     validators: [],
     messages: [],
   },
-  lastName: {
+  last_name: {
     emptyMessage: "Please provide your last name",
     validators: [],
     messages: [],

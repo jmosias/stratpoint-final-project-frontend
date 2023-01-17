@@ -19,13 +19,20 @@
     }
   }
 
-  .formContainer {
+  .form {
+    height: 100%;
+    margin-top: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .form-container {
     height: 100%;
     padding: 1.5rem 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    // gap: 3rem;
 
     .name {
       width: 100%;
@@ -42,6 +49,58 @@
       display: flex;
       justify-content: flex-end;
       gap: 0.3rem;
+    }
+  }
+
+  .upload-photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+
+    .uploader {
+      cursor: pointer;
+      margin-top: 1.2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.3rem;
+      font-weight: $bold;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+
+      .icon {
+        $icon-size: 0.9rem;
+        width: $icon-size;
+        height: $icon-size;
+        color: $black;
+      }
+
+      &:hover {
+        border-bottom: 0.12rem solid $black;
+      }
+    }
+  }
+
+  .avatar-container {
+    $size: 12rem;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary;
+
+    .avatar {
+      $avatar-size: 97%;
+      width: $avatar-size;
+      height: $avatar-size;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
+      transition: all 0.45s ease-out;
     }
   }
 

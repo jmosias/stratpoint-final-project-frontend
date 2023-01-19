@@ -4,6 +4,7 @@ import ErrorPage from "./pages/Error404";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import SingleBlog from "./pages/SingleBlog";
 
 function App() {
   const { pathname } = useLocation();
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/blogs/:id" element={<SingleBlog />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

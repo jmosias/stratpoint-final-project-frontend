@@ -1,0 +1,50 @@
+@import "../../styles/variables";
+
+.blogs {
+  margin: 3rem 12rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+
+  .blog {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    &:hover {
+      .title {
+        transition: all 0.45s ease-out;
+        color: $primary;
+      }
+
+      .image {
+        transform: scale(1.09);
+        transition: transform 0.45s;
+      }
+    }
+
+    .title {
+      margin: 0;
+      text-align: end;
+    }
+
+    .image-container {
+      overflow: hidden;
+      height: 48vh;
+      max-height: 48vh;
+      border-radius: 0.3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .image {
+        $image-size: 100%;
+        width: $image-size;
+        height: $image-size;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  }
+}

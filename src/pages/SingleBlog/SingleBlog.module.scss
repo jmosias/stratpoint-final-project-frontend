@@ -1,0 +1,57 @@
+@import "../../styles/variables";
+
+.blog {
+  margin: 3rem 12rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+
+  .image-container {
+    overflow: hidden;
+    border-radius: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .image {
+      $image-size: 100%;
+      width: $image-size;
+      height: $image-size;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .info {
+    .title {
+      margin: 0;
+      margin-top: 2.1rem;
+      font-size: 3rem;
+    }
+
+    .small {
+      margin-bottom: 2.1rem;
+      font-size: 0.75rem;
+      font-weight: $bold;
+
+      .creator,
+      .date {
+        margin: 0;
+        margin-top: 0.3rem;
+      }
+
+      .creator {
+        color: $primary;
+
+        .span {
+          color: $black;
+        }
+      }
+    }
+
+    .description {
+      margin: 0;
+      line-height: 1.5rem;
+    }
+  }
+}

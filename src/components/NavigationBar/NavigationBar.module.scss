@@ -20,6 +20,8 @@
 }
 
 .avatar-container {
+  position: relative;
+
   cursor: pointer;
   $size: 3rem;
   width: $size;
@@ -38,5 +40,35 @@
     object-fit: cover;
     object-position: center;
     transition: all 0.45s ease-out;
+  }
+
+  .menu {
+    z-index: 3;
+    position: absolute;
+    top: 4.5rem;
+    right: 0;
+    padding: 0.6rem 0;
+    border: 0.015rem solid $gray;
+    border-radius: 0.3rem;
+    background-color: $white;
+    list-style-type: none;
+
+    .item {
+      margin: 0;
+      padding: 0.3rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: bold;
+      white-space: nowrap;
+
+      &:hover {
+        background-color: $light-gray;
+      }
+    }
+
+    .logout {
+      margin-top: 0.6rem;
+      border-top: 0.015rem solid $gray;
+      color: $error;
+    }
   }
 }

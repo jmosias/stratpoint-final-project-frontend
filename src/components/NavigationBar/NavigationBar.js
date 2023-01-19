@@ -10,8 +10,21 @@ function NavigationBar() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigate = useNavigate();
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const dashboardHandler = () => {
+    navigate("/dashboard/blogs");
+  };
+
+  const profileHandler = () => {
+    navigate("/dashboard/profile");
+  };
 
   const logoutHandler = () => {
     logout(() => {
@@ -38,15 +51,28 @@ function NavigationBar() {
         {isLoggedIn ? (
           <>
             <p className={classes.username}>{user.username}</p>
-            <div
-              className={classes["avatar-container"]}
-              onClick={logoutHandler}
-            >
+            <div className={classes["avatar-container"]} onClick={toggleMenu}>
               <img
                 src={imageUrl}
                 alt="profile_picture"
                 className={classes.avatar}
               />
+              {isMenuOpen && (
+                <ul className={classes.menu}>
+                  <li className={classes.item} onClick={dashboardHandler}>
+                    Go to Dashboard
+                  </li>
+                  <li className={classes.item} onClick={profileHandler}>
+                    View Profile
+                  </li>
+                  <li
+                    className={`${classes.item} ${classes.logout}`}
+                    onClick={logoutHandler}
+                  >
+                    Logout
+                  </li>
+                </ul>
+              )}
             </div>
           </>
         ) : (

@@ -1,7 +1,7 @@
-import axios from "axios";
 import FeatherIcon from "feather-icons-react";
 import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { signup } from "../../api";
 import AppAccount from "../../components/AppAccount";
 import AppButton from "../../components/AppButton";
 import AppLogo from "../../components/AppLogo";
@@ -14,7 +14,7 @@ import classes from "./SignUp.module.scss";
 const defaultImage = require("../../images/default_profile_photo.png");
 
 function SignUp() {
-  const [formData, setFormData] = useState(initialSignupData);
+  const [firstStepData, setFirstStepData] = useState(initialSignupData);
   const [pictureFile, setPictureFile] = useState();
   const [errors, setErrors] = useState({});
   const [stepCounter, setStepCounter] = useState(0);
@@ -23,6 +23,8 @@ function SignUp() {
   const [defaultPicture, setdefaultPicture] = useState(defaultImage);
 
   const signupSteps = ["Account Information", "User Photo"];
+
+  const navigate = useNavigate();
 
   // If no form errors, continue to next step
   const nextStep = useCallback(() => {
@@ -40,32 +42,43 @@ function SignUp() {
   };
 
   const handleNext = () => {
-    setErrors(checkValidation(formData, signupFormRules));
+    setErrors(checkValidation(firstStepData, signupFormRules));
     setHasSubmitted(true);
   };
 
   const fileHandler = (e) => {
     setPictureFile(e.target.files[0]);
     setdefaultPicture(URL.createObjectURL(e.target.files[0]));
+    setErrors({ ...errors, profile_picture: null });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const finalFormData = new FormData();
-    Object.keys(formData).forEach((key) => {
-      console.log(key);
-      finalFormData.append(key, formData[key]);
+    const formData = new FormData();
+    Object.keys(firstStepData).forEach((key) => {
+      formData.append(key, firstStepData[key]);
     });
-    finalFormData.append("profile_picture", pictureFile);
+    formData.append("profile_picture", pictureFile);
 
-    axios
-      .post("http://localhost:7000/users/signup", finalFormData)
+    signup(formData)
       .then((res) => {
-        console.log(res.data);
+        // Toast this:
+        console.log(res.data.message);
+        navigate("/login");
       })
       .catch((err) => {
-        console.log(err);
+        const errorData = err.response.data.data;
+        if (errorData.length > 0) {
+          const tempErrors = {};
+          errorData.forEach((error) => {
+            tempErrors[error.param] = error.msg;
+          });
+          setErrors(tempErrors);
+          backStep();
+        } else {
+          setErrors({ ...errors, profile_picture: err.response.data.message });
+        }
       });
   };
 
@@ -113,15 +126,19 @@ function SignUp() {
                   onChange={fileHandler}
                   hidden
                 />
+                <p className={classes.error}>{errors["profile_picture"]}</p>
               </div>
             ) : (
               <div className={classes.inputs}>
                 <div className={classes.name}>
                   <FormInput
                     label="First Name"
-                    value={formData.first_name}
+                    value={firstStepData.first_name}
                     onChange={(e) => {
-                      setFormData({ ...formData, first_name: e.target.value });
+                      setFirstStepData({
+                        ...firstStepData,
+                        first_name: e.target.value,
+                      });
                       setErrors({ ...errors, first_name: null });
                     }}
                     error={errors["first_name"]}
@@ -129,9 +146,12 @@ function SignUp() {
 
                   <FormInput
                     label="Last Name"
-                    value={formData.last_name}
+                    value={firstStepData.last_name}
                     onChange={(e) => {
-                      setFormData({ ...formData, last_name: e.target.value });
+                      setFirstStepData({
+                        ...firstStepData,
+                        last_name: e.target.value,
+                      });
                       setErrors({ ...errors, last_name: null });
                     }}
                     error={errors["last_name"]}
@@ -140,9 +160,12 @@ function SignUp() {
 
                 <FormInput
                   label="Email"
-                  value={formData.email}
+                  value={firstStepData.email}
                   onChange={(e) => {
-                    setFormData({ ...formData, email: e.target.value });
+                    setFirstStepData({
+                      ...firstStepData,
+                      email: e.target.value,
+                    });
                     setErrors({ ...errors, email: null });
                   }}
                   error={errors["email"]}
@@ -150,9 +173,12 @@ function SignUp() {
 
                 <FormInput
                   label="Username"
-                  value={formData.username}
+                  value={firstStepData.username}
                   onChange={(e) => {
-                    setFormData({ ...formData, username: e.target.value });
+                    setFirstStepData({
+                      ...firstStepData,
+                      username: e.target.value,
+                    });
                     setErrors({ ...errors, username: null });
                   }}
                   error={errors["username"]}
@@ -161,9 +187,12 @@ function SignUp() {
                 <FormInput
                   type="password"
                   label="Password"
-                  value={formData.password}
+                  value={firstStepData.password}
                   onChange={(e) => {
-                    setFormData({ ...formData, password: e.target.value });
+                    setFirstStepData({
+                      ...firstStepData,
+                      password: e.target.value,
+                    });
                     setErrors({ ...errors, password: null });
                   }}
                   error={errors["password"]}

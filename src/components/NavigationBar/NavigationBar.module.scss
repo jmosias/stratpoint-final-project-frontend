@@ -1,3 +1,5 @@
+@import "../../styles/variables";
+
 .nav {
   padding: 1.8rem 6rem;
   display: flex;
@@ -7,5 +9,34 @@
 .links {
   margin: 0;
   display: flex;
+  align-items: center;
   gap: 0.9rem;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.avatar-container {
+  cursor: pointer;
+  $size: 3rem;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $primary;
+
+  .avatar {
+    $avatar-size: 97%;
+    width: $avatar-size;
+    height: $avatar-size;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    transition: all 0.45s ease-out;
+  }
 }

@@ -19,7 +19,6 @@ const checkValidation = (data, rules) => {
       });
     }
   });
-  console.log(errors);
 
   return errors;
 };

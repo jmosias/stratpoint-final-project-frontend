@@ -2,7 +2,16 @@ import FeatherIcon from "feather-icons-react";
 import { useNavigate } from "react-router-dom";
 import classes from "./AppButton.module.scss";
 
-function AppButton({ type, text, icon, redirect, onClick, disabled, flat }) {
+function AppButton({
+  type,
+  text,
+  icon,
+  redirect,
+  onClick,
+  disabled,
+  flat,
+  secondary,
+}) {
   const navigate = useNavigate();
 
   const buttonClickHandler = async () => {
@@ -13,7 +22,13 @@ function AppButton({ type, text, icon, redirect, onClick, disabled, flat }) {
   return (
     <button
       type={type || "button"}
-      className={classes.button + " " + (flat ? classes.flat : "")}
+      className={
+        classes.button +
+        " " +
+        (flat ? classes.flat : "") +
+        " " +
+        (secondary ? classes.secondary : "")
+      }
       onClick={buttonClickHandler}
       disabled={disabled}
     >

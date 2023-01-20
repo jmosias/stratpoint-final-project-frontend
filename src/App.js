@@ -1,5 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
+import DashboardBlogs from "./pages/DashboardBlogs";
+import DashboardSingleBlog from "./pages/DashboardSingleBlog";
 import ErrorPage from "./pages/Error404";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -17,6 +19,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/blogs/:id" element={<SingleBlog />} />
+        <Route path="/dashboard/blogs" element={<DashboardBlogs />} />
+        <Route path="/dashboard/blogs/:id" element={<DashboardSingleBlog />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

@@ -7,21 +7,13 @@ const $http = axios.create({
   timeout: 20000,
 });
 
-const POST = async (url, query) => {
-  const res = await $http.post(url, query);
-  return res;
-};
-
-const AUTHORIZED_POST = async (url, query) => {
-  const token = localStorage.getItem("appToken");
-  const res = await $http.post(url, query, {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  return res;
-};
-
 const GET = async (url, query) => {
   const res = await $http.get(url, { params: query });
+  return res;
+};
+
+const POST = async (url, query) => {
+  const res = await $http.post(url, query);
   return res;
 };
 
@@ -34,15 +26,33 @@ const AUTHORIZED_GET = async (url, query) => {
   return res;
 };
 
+const AUTHORIZED_POST = async (url, query) => {
+  const token = localStorage.getItem("appToken");
+  const res = await $http.post(url, query, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res;
+};
+
+const AUTHORIZED_PATCH = async (url, query) => {
+  const token = localStorage.getItem("appToken");
+  const res = await $http.patch(url, query, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return res;
+};
+
 const api = {
   signup: "/users/signup",
   login: "/users/login",
   getUser: "/users/", // :id
 
+  createBlog: "/blogs",
   getAllBlogs: "/blogs",
   getBlog: "/blogs/", // :id
   getBlogsByUser: "/blogs/user/", // :id
-  createBlog: "/blogs",
+  softDeleteBlog: "/blogs/delete/", // :id
+  patchBlog: "/blogs/update/", // :id
 };
 
 // USERS
@@ -65,6 +75,10 @@ export const getUser = (id, params = {}) => {
 };
 
 // BLOGS
+export const createBlog = (data) => {
+  return AUTHORIZED_POST(api.createBlog, data);
+};
+
 export const getAllBlogs = () => {
   return GET(api.getAllBlogs);
 };
@@ -77,6 +91,10 @@ export const getBlog = (id, params = {}) => {
   return GET(api.getBlog + id, params);
 };
 
-export const createBlog = (data) => {
-  return AUTHORIZED_POST(api.createBlog, data);
+export const softDeleteBlog = (id, params = {}) => {
+  return AUTHORIZED_PATCH(api.softDeleteBlog + id, [params]);
+};
+
+export const patchBlog = (id, data) => {
+  return AUTHORIZED_PATCH(api.patchBlog + id, data);
 };

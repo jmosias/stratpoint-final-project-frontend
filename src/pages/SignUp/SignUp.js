@@ -59,6 +59,8 @@ function SignUp() {
     Object.keys(firstStepData).forEach((key) => {
       formData.append(key, firstStepData[key]);
     });
+    console.log(firstStepData);
+    formData.append("email", firstStepData.email);
     formData.append("profile_picture", pictureFile);
 
     signup(formData)

@@ -5,6 +5,7 @@ import DashboardSingleBlog from "./pages/DashboardSingleBlog";
 import ErrorPage from "./pages/Error404";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import ProtectedRoute from "./pages/ProtectedRoute";
 import SignUp from "./pages/SignUp";
 import SingleBlog from "./pages/SingleBlog";
 
@@ -19,8 +20,22 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/blogs/:id" element={<SingleBlog />} />
-        <Route path="/dashboard/blogs" element={<DashboardBlogs />} />
-        <Route path="/dashboard/blogs/:id" element={<DashboardSingleBlog />} />
+        <Route
+          path="/dashboard/blogs"
+          element={
+            <ProtectedRoute>
+              <DashboardBlogs />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/blogs/:id"
+          element={
+            <ProtectedRoute>
+              <DashboardSingleBlog />
+            </ProtectedRoute>
+          }
+        />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </>

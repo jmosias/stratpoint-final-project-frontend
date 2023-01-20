@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const BASE_URL = "http://localhost:7000";
+export const BASE_URL = process.env.REACT_APP_SERVER_URL;
 
 const $http = axios.create({
   baseURL: BASE_URL,

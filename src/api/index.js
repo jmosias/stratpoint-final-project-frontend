@@ -46,6 +46,7 @@ const api = {
   signup: "/users/signup",
   login: "/users/login",
   getUser: "/users/", // :id
+  updateUser: "/users/update/", // :id
 
   createBlog: "/blogs",
   getAllBlogs: "/blogs",
@@ -72,6 +73,10 @@ export const logout = async (callback) => {
 
 export const getUser = (id, params = {}) => {
   return AUTHORIZED_GET(api.getUser + id, params);
+};
+
+export const updateUser = (id, data) => {
+  return AUTHORIZED_PATCH(api.updateUser + id, data);
 };
 
 // BLOGS

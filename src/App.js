@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import DashboardBlogs from "./pages/DashboardBlogs";
+import DashboardProfile from "./pages/DashboardProfile";
 import DashboardSingleBlog from "./pages/DashboardSingleBlog";
 import ErrorPage from "./pages/Error404";
 import Home from "./pages/Home";
@@ -33,6 +34,14 @@ function App() {
           element={
             <ProtectedRoute>
               <DashboardSingleBlog />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/profile"
+          element={
+            <ProtectedRoute>
+              <DashboardProfile />
             </ProtectedRoute>
           }
         />

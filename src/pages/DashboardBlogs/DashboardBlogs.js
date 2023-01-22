@@ -43,7 +43,13 @@ function DashboardBlogs() {
     <>
       {isLoading && <AppLoader />}
       <div className={classes.dashboard}>
-        <h2 className={classes["page-title"]}>Dashboard - Blog List</h2>
+        <div className={classes.header}>
+          <h2 className={classes.title}>Dashboard - Blog List</h2>
+          <AppButton
+            text="Create a new blog"
+            onClick={() => navigate("/dashboard/blogs/create")}
+          />
+        </div>
         <div className={classes.blogs}>
           {blogs ? (
             blogs.map((blog) => (

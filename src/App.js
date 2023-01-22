@@ -1,6 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import DashboardBlogs from "./pages/DashboardBlogs";
+import DashboardCreate from "./pages/DashboardCreate";
 import DashboardProfile from "./pages/DashboardProfile";
 import DashboardSingleBlog from "./pages/DashboardSingleBlog";
 import ErrorPage from "./pages/Error404";
@@ -26,6 +27,14 @@ function App() {
           element={
             <ProtectedRoute>
               <DashboardBlogs />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/blogs/create"
+          element={
+            <ProtectedRoute>
+              <DashboardCreate />
             </ProtectedRoute>
           }
         />

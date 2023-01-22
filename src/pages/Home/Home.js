@@ -14,20 +14,6 @@ function Home() {
 
   const navigate = useNavigate();
 
-  // const createHandler = () => {
-  //   const data = {
-  //     title: "Sunday Chili",
-  //     description:
-  //       "It’s thick and appropriately chunky, spicy and extremely flavorful without being hot, balanced just right between meat, beans, and vegetables, and excellently scoopable (what else is chili for, really). And not to mention it does that chili magic thing where it GETS BETTER AS LEFTOVERS. There’s just something about a slow-simmered chili on a Sunday that’s chock-full of cozy goodness.",
-  //     cover_picture_url: `/images/blogs/${ADMIN_ID}/sunday_chili.jpg`,
-  //   };
-  //   createBlog(data)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => console.log(err));
-  // };
-
   const goToBlog = (id) => {
     navigate(`/blogs/${id}`);
   };
@@ -43,7 +29,6 @@ function Home() {
 
   return (
     <div>
-      {/* <AppButton text="Create" onClick={createHandler} /> */}
       {isLoading && <AppLoader />}
       <div className={classes.blogs}>
         {blogs &&

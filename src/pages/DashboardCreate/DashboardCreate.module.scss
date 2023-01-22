@@ -1,0 +1,98 @@
+@import "../../styles/variables";
+
+.dashboard {
+  margin: 3rem 12rem;
+
+  .page-title {
+    margin-bottom: 2.4rem;
+    font-size: 2.4rem;
+  }
+}
+
+.blog {
+  display: grid;
+  grid-template-columns: 33% 66%;
+  gap: 3rem;
+
+  .image-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .image {
+      $image-size: 100%;
+      width: $image-size;
+      height: $image-size;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
+  .uploader {
+    cursor: pointer;
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: $bold;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+
+    .icon {
+      $icon-size: 0.9rem;
+      width: $icon-size;
+      height: $icon-size;
+      color: $black;
+    }
+  }
+
+  .error {
+    margin: 0;
+    color: $error;
+    font-size: 0.75rem;
+    font-weight: $bold;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    .title,
+    .description {
+      padding: 0.6rem 0.9rem;
+      outline: none;
+      border-radius: 0.3rem;
+      border: solid 0.015rem transparent;
+
+      &:focus,
+      &:hover {
+        border-color: $gray;
+      }
+    }
+
+    .title {
+      margin: 0;
+      margin-top: 2.1rem;
+      font-size: 3rem;
+    }
+
+    .description {
+      margin: 0;
+      line-height: 1.5rem;
+      height: 45vh;
+      resize: none;
+    }
+
+    .buttons {
+      margin-top: 1.5rem;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.6rem;
+    }
+  }
+}

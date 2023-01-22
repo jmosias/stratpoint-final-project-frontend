@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BASE_URL, getBlog, getUser } from "../../api";
+import AppLoader from "../../components/AppLoader";
 import classes from "./SingleBlog.module.scss";
 
 function SingleBlog() {
+  const [isLoading, setIsLoading] = useState(true);
   const [blog, setBlog] = useState(null);
   const [creator, setCreator] = useState(null);
   const { id } = useParams();
@@ -19,6 +21,7 @@ function SingleBlog() {
     getBlog(id)
       .then((res) => {
         setBlog(res.data);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, [id]);
@@ -35,11 +38,12 @@ function SingleBlog() {
 
   return (
     <>
+      {isLoading && <AppLoader />}
       {blog && creator && (
         <div className={classes.blog}>
           <div className={classes["image-container"]}>
             <img
-              src={BASE_URL + blog.cover_picture_url}
+              src={BASE_URL + "/" + blog.cover_picture_url}
               alt={blog.title}
               className={classes.image}
             />

@@ -10,6 +10,7 @@ import { initialLoginData, loginFormRules } from "../../helpers/rulesLogin";
 import classes from "./Login.module.scss";
 
 function Login() {
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(initialLoginData);
   const [errors, setErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
@@ -18,6 +19,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     setErrors(checkValidation(formData, loginFormRules));
     setHasSubmitted(true);
   };
@@ -84,7 +86,7 @@ function Login() {
             </div>
 
             <div className={classes.buttons}>
-              <AppButton text="Login" type="submit" />
+              <AppButton text="Login" type="submit" isLoading={isLoading} />
             </div>
           </form>
         </div>

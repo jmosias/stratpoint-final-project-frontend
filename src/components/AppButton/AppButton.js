@@ -11,6 +11,7 @@ function AppButton({
   disabled,
   flat,
   secondary,
+  isLoading,
 }) {
   const navigate = useNavigate();
 
@@ -27,11 +28,16 @@ function AppButton({
         " " +
         (flat ? classes.flat : "") +
         " " +
-        (secondary ? classes.secondary : "")
+        (secondary ? classes.secondary : "") +
+        " " +
+        (disabled ? classes.disabled : "") +
+        " " +
+        (isLoading ? classes.loading : "")
       }
       onClick={buttonClickHandler}
-      disabled={disabled}
+      disabled={disabled || isLoading}
     >
+      {isLoading && <span className={classes.loader}></span>}
       {icon && <FeatherIcon icon={icon} className={classes.icon} />}
       {text}
     </button>

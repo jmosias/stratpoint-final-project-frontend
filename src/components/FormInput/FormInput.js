@@ -2,7 +2,15 @@ import FeatherIcon from "feather-icons-react";
 import { useId, useState } from "react";
 import classes from "./FormInput.module.scss";
 
-function FormInput({ type, label, placeholder, value, onChange, error }) {
+function FormInput({
+  type,
+  label,
+  placeholder,
+  value,
+  onChange,
+  error,
+  isLoading,
+}) {
   const id = useId();
 
   const [passwordType, setPasswordType] = useState("password");
@@ -21,9 +29,16 @@ function FormInput({ type, label, placeholder, value, onChange, error }) {
           id={id}
           type={type === "password" ? passwordType : "text"}
           placeholder={placeholder}
-          className={classes.input + " " + (error ? classes.error : "")}
+          className={
+            classes.input +
+            " " +
+            (error ? classes.error : "") +
+            " " +
+            (isLoading ? classes.loading : "")
+          }
           value={value}
           onChange={onChange}
+          disabled={isLoading}
         />
         {type === "password" && (
           <div

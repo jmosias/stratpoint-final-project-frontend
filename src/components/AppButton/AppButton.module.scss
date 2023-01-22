@@ -40,4 +40,37 @@
       color: $primary;
     }
   }
+
+  &.loading,
+  &.disabled {
+    cursor: wait;
+    filter: none;
+    background-color: $gray;
+    color: $black;
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+  }
+}
+
+.loader {
+  $size: 0.75rem;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 0.015rem solid $black;
+  border-right: 0.015rem solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -32,6 +32,10 @@
         border-color: $error;
       }
 
+      &.loading {
+        cursor: not-allowed;
+      }
+
       &:focus,
       &:hover {
         background-color: $white;

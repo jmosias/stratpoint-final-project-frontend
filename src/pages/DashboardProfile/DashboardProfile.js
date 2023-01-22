@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL, updateUser } from "../../api";
 import AppButton from "../../components/AppButton";
+import AppLoader from "../../components/AppLoader";
 import FormInput from "../../components/FormInput";
 import classes from "./DashboardProfile.module.scss";
 
@@ -15,6 +16,8 @@ const inititalFormData = {
 };
 
 function DashboardProfile() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [isPosting, setIsPosting] = useState(false);
   const [user, setUser] = useState();
   const [formData, setFormData] = useState(inititalFormData);
   const [pictureFile, setPictureFile] = useState();
@@ -31,6 +34,7 @@ function DashboardProfile() {
 
   const handleUpdate = (e) => {
     e.preventDefault();
+    setIsPosting(true);
 
     const finalData = new FormData();
     Object.keys(formData).forEach((key) => {
@@ -64,6 +68,7 @@ function DashboardProfile() {
     if (user) {
       setPictureUrl(BASE_URL + "/" + user.profile_picture_url);
       setFormData(user);
+      setIsLoading(false);
     }
   }, [user]);
 
@@ -73,6 +78,7 @@ function DashboardProfile() {
 
   return (
     <>
+      {isLoading && <AppLoader />}
       {user && pictureUrl && (
         <div className={classes.profile}>
           <h2 className={classes.title}>User Profile</h2>
@@ -98,6 +104,7 @@ function DashboardProfile() {
                 type="file"
                 filename="profile_picture_url"
                 onChange={fileHandler}
+                disabled={isPosting}
                 hidden
               />
               <p className={classes.error}>{errors["profile_picture"]}</p>
@@ -116,6 +123,7 @@ function DashboardProfile() {
                     setErrors({ ...errors, first_name: null });
                   }}
                   error={errors["first_name"]}
+                  isLoading={isPosting}
                 />
 
                 <FormInput
@@ -129,6 +137,7 @@ function DashboardProfile() {
                     setErrors({ ...errors, last_name: null });
                   }}
                   error={errors["last_name"]}
+                  isLoading={isPosting}
                 />
               </div>
 
@@ -143,6 +152,7 @@ function DashboardProfile() {
                   setErrors({ ...errors, email: null });
                 }}
                 error={errors["email"]}
+                isLoading={isPosting}
               />
 
               <FormInput
@@ -156,6 +166,7 @@ function DashboardProfile() {
                   setErrors({ ...errors, username: null });
                 }}
                 error={errors["username"]}
+                isLoading={isPosting}
               />
 
               {/* <FormInput
@@ -173,7 +184,11 @@ function DashboardProfile() {
               /> */}
 
               <div className={classes.buttons}>
-                <AppButton text="Update Profile" type="submit" />
+                <AppButton
+                  text="Update Profile"
+                  type="submit"
+                  isLoading={isPosting}
+                />
               </div>
             </div>
           </form>

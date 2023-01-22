@@ -14,6 +14,7 @@ import classes from "./SignUp.module.scss";
 const defaultImage = require("../../images/default_profile_photo.png");
 
 function SignUp() {
+  const [isLoading, setIsLoading] = useState(false);
   const [firstStepData, setFirstStepData] = useState(initialSignupData);
   const [pictureFile, setPictureFile] = useState();
   const [errors, setErrors] = useState({});
@@ -54,6 +55,7 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
 
     const formData = new FormData();
     Object.keys(firstStepData).forEach((key) => {
@@ -204,12 +206,25 @@ function SignUp() {
             {/* FORM BUTTONS */}
             {isValidated ? (
               <div className={classes.buttons}>
-                <AppButton text="Back" flat onClick={backStep} />
-                <AppButton text="Create Account" type="submit" />
+                <AppButton
+                  text="Back"
+                  flat
+                  onClick={backStep}
+                  disabled={isLoading}
+                />
+                <AppButton
+                  text="Create Account"
+                  type="submit"
+                  isLoading={isLoading}
+                />
               </div>
             ) : (
               <div className={classes.buttons}>
-                <AppButton text="Continue" onClick={handleNext} />
+                <AppButton
+                  text="Continue"
+                  onClick={handleNext}
+                  disabled={isLoading}
+                />
               </div>
             )}
           </form>

@@ -21,7 +21,6 @@ function DashboardSingleBlog() {
   const navigate = useNavigate();
 
   const fileHandler = (e) => {
-    console.log(e.target.files[0]);
     setPictureFile(e.target.files[0]);
     setPictureUrl(URL.createObjectURL(e.target.files[0]));
     setErrors({ ...errors, cover_picture: null });
@@ -34,8 +33,6 @@ function DashboardSingleBlog() {
     Object.keys(formData).forEach((key) => {
       finalData.append(key, formData[key]);
     });
-    // console.log(pictureFile);
-    // if (pictureFile)
     finalData.append("cover_picture", pictureFile);
 
     patchBlog(id, formData)

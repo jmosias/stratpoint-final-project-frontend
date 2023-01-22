@@ -60,8 +60,7 @@ function SignUp() {
       formData.append(key, firstStepData[key]);
     });
     console.log(firstStepData);
-    formData.append("email", firstStepData.email);
-    formData.append("profile_picture", pictureFile);
+    formData.append("image", pictureFile);
 
     signup(formData)
       .then((res) => {

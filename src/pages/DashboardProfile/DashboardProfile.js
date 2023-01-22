@@ -24,7 +24,6 @@ function DashboardProfile() {
   const navigate = useNavigate();
 
   const fileHandler = (e) => {
-    console.log(e.target.files[0]);
     setPictureFile(e.target.files[0]);
     setPictureUrl(URL.createObjectURL(e.target.files[0]));
     setErrors({ ...errors, profile_picture: null });
@@ -37,11 +36,9 @@ function DashboardProfile() {
     Object.keys(formData).forEach((key) => {
       finalData.append(key, formData[key]);
     });
-    // console.log(pictureFile);
-    // if (pictureFile)
-    finalData.append("profile_picture", pictureFile);
+    finalData.append("image", pictureFile);
 
-    updateUser(user._id, formData)
+    updateUser(user._id, finalData)
       .then((res) => {
         // Toast this:
         console.log(res.data.message);

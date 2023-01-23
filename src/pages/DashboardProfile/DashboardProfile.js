@@ -42,7 +42,7 @@ function DashboardProfile() {
     });
     finalData.append("image", pictureFile);
 
-    updateUser(user._id, finalData)
+    updateUser(finalData)
       .then((res) => {
         // Toast this:
         console.log(res.data.message);

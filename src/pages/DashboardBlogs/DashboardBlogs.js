@@ -67,7 +67,12 @@ function DashboardBlogs() {
                       />
                     </div>
                     <div className={classes.info}>
-                      <h3 className={classes.title}>{blog.title}</h3>
+                      <h3
+                        className={classes.title}
+                        onClick={() => navigate("/blogs/" + blog._id)}
+                      >
+                        {blog.title}
+                      </h3>
                       <div className={classes.buttons}>
                         <AppButton
                           text="Update"

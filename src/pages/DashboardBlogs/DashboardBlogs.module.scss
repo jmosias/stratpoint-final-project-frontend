@@ -4,13 +4,13 @@
   margin: 0 12rem;
 
   .header {
+    margin: 2.4rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   .title {
-    margin-bottom: 4.2rem;
     font-size: 2.4rem;
   }
 }
@@ -57,8 +57,13 @@
       align-items: flex-start;
 
       .title {
+        cursor: pointer;
         margin: 0;
         font-size: 1.5rem;
+
+        &:hover {
+          color: $primary;
+        }
       }
 
       .buttons {

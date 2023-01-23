@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 
 .nav {
-  padding: 1.8rem 6rem;
+  padding: 2.4rem 6rem;
   display: flex;
   justify-content: space-between;
 }
@@ -48,14 +48,14 @@
     top: 4.5rem;
     right: 0;
     padding: 0.6rem 0;
-    border: 0.015rem solid $gray;
+    border: 0.015rem solid $light-gray;
     border-radius: 0.3rem;
     background-color: $white;
     list-style-type: none;
 
     .item {
       margin: 0;
-      padding: 0.3rem 1.5rem;
+      padding: 0.6rem 1.5rem;
       font-size: 0.9rem;
       font-weight: bold;
       white-space: nowrap;
@@ -67,7 +67,7 @@
 
     .logout {
       margin-top: 0.6rem;
-      border-top: 0.015rem solid $gray;
+      border-top: 0.015rem solid $light-gray;
       color: $error;
     }
   }

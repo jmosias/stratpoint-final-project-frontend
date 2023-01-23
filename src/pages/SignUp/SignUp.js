@@ -71,6 +71,7 @@ function SignUp() {
         navigate("/login");
       })
       .catch((err) => {
+        setIsLoading(false);
         const errorData = err.response.data.data;
         if (errorData.length > 0) {
           const tempErrors = {};

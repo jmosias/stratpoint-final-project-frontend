@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { BASE_URL, getBlogsByUser } from "../../api";
 import { useNavigate } from "react-router-dom";
 import AppLoader from "../../components/AppLoader";
-// import AppButton from "../../components/AppButton";
+import SearchBar from "../../components/SearchBar";
 
 const ADMIN_ID = "63c9ac5dbd0fb2fce66f8221";
 
@@ -30,6 +30,7 @@ function Home() {
   return (
     <div>
       {isLoading && <AppLoader />}
+      {!isLoading && blogs && <SearchBar blogs={blogs} url="/blogs/" />}
       <div className={classes.blogs}>
         {blogs &&
           blogs.map((blog) => (

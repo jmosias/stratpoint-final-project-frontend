@@ -2,6 +2,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import NavigationBar from "./components/NavigationBar";
 import DashboardBlogs from "./pages/DashboardBlogs";
 import DashboardCreate from "./pages/DashboardCreate";
+import DashboardPassword from "./pages/DashboardPassword";
 import DashboardProfile from "./pages/DashboardProfile";
 import DashboardSingleBlog from "./pages/DashboardSingleBlog";
 import ErrorPage from "./pages/Error404";
@@ -51,6 +52,14 @@ function App() {
           element={
             <ProtectedRoute>
               <DashboardProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/dashboard/profile/password"
+          element={
+            <ProtectedRoute>
+              <DashboardPassword />
             </ProtectedRoute>
           }
         />

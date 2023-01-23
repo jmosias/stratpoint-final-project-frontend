@@ -26,6 +26,10 @@ function NavigationBar() {
     navigate("/dashboard/profile");
   };
 
+  const passwordHandler = () => {
+    navigate("/dashboard/profile/password");
+  };
+
   const logoutHandler = () => {
     logout(() => {
       navigate(0);
@@ -64,6 +68,9 @@ function NavigationBar() {
                   </li>
                   <li className={classes.item} onClick={profileHandler}>
                     View Profile
+                  </li>
+                  <li className={classes.item} onClick={passwordHandler}>
+                    Change Password
                   </li>
                   <li
                     className={`${classes.item} ${classes.logout}`}

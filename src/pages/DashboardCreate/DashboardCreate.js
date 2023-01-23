@@ -44,6 +44,7 @@ function DashboardCreate() {
         navigate("/dashboard/blogs");
       })
       .catch((err) => {
+        setIsPosting(false);
         const errorData = err.response.data.data;
         if (errorData.length > 0) {
           const tempErrors = {};

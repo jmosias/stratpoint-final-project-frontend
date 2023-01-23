@@ -47,6 +47,7 @@ function DashboardSingleBlog() {
         navigate(0);
       })
       .catch((err) => {
+        setIsPosting(false);
         const errorData = err.response.data.data;
         if (errorData.length > 0) {
           const tempErrors = {};

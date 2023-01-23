@@ -51,6 +51,7 @@ function DashboardProfile() {
         navigate(0);
       })
       .catch((err) => {
+        setIsPosting(false);
         const errorData = err.response.data.data;
         if (errorData.length > 0) {
           const tempErrors = {};
@@ -168,20 +169,6 @@ function DashboardProfile() {
                 error={errors["username"]}
                 isLoading={isPosting}
               />
-
-              {/* <FormInput
-                type="password"
-                label="Password"
-                value={formData.password}
-                onChange={(e) => {
-                  setFormData({
-                    ...formData,
-                    password: e.target.value,
-                  });
-                  setErrors({ ...errors, password: null });
-                }}
-                error={errors["password"]}
-              /> */}
 
               <div className={classes.buttons}>
                 <AppButton
